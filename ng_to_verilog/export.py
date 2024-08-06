@@ -17,6 +17,11 @@ def export(topLevelComponentName, ngData):
 	global _exported_components
 	_exported_components = []
 
+	# make sure the output folder is there
+	outputFolder = ngv.get_output_folder()
+	if not os.path.exists(outputFolder):
+		os.mkdir(outputFolder)
+
 	env = Environment(
 		loader=PackageLoader("ng_to_verilog"),
 		autoescape=False,
