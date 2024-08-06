@@ -21,7 +21,7 @@ People end up doing digital logic design from many different starting points. My
 pip install ng-to-verilog (TBD)
 ```
 
-or, from the source root folder
+or, from the root folder of the repo
 
 ```
 python -m pip install -e .
