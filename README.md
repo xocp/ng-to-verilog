@@ -15,6 +15,10 @@ Run your favorite Nandgame creations on real or simulated hardware! Reify your t
 
 People end up doing digital logic design from many different starting points. My 10 year old son became interested in digital logic from Minecraft and the many YouTube Minecraft Redstone content creators such as [Mattbatwings](https://www.youtube.com/@mattbatwings). There are a number of excellent game-oriented entry-points such as [Nandgame](https://nandgame.com/). How do you start from a game and level up into more mainstream digital design tools? This module provides one answer.
 
+## Getting Started
+
+You can run the provided NgToVerilog.py and it will convert a sample Nandgame export with a custom CPU. You can also uncomment and run the CPU3 export which is the Nandgame computer. You'll have to edit any exported ROMs and copy in specific level code for the Nandgame CPU. The included custom CPU loads a Fibonnaci sequence program which is output on a debug port.
+
 ## Credits
 - To Olav Junker Kjær, the creator of [Nandgame](https://nandgame.com/) who has undoubtedly inspired more generations of people into the world of digital logic. Kudos.
 
