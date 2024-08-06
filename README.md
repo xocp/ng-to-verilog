@@ -1,4 +1,4 @@
-# ng_to_verilog
+# ng-to-verilog
 
 ng-to-verilog is a Python module that enables conversion of [Nandgame](https://nandgame.com/) json exports into [Verilog](https://standards.ieee.org/ieee/1364/2051/).
 
