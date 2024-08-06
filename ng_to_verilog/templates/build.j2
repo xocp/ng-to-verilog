@@ -1,0 +1,3 @@
+iverilog -o {{topLevelComponentName}}.vvp{% for componentName in exportedComponents %} {{ componentName }}.v{% endfor +%}
+vvp {{ topLevelComponentName }}.vvp
+gtkwave {{ topLevelComponentName }}.vcd

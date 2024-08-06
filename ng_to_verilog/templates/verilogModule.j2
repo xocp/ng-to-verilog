@@ -1,0 +1,49 @@
+{% macro portVarSize(size) %}
+	{% if size > 1 %}[{{ size }}:0] {% endif %}
+{% endmacro %}
+{% macro modulePorts(ports) %}
+	{% if ports|length > 0 %}(
+		{% for port in ports %}	{{ port.type }} {% if port.verilogType is defined %}{{ port.verilogType }} {% endif %}{{ portVarSize(port.size) }}{{ port.name }}{% if loop.last == False %},{% endif +%}
+		{% endfor %});{% else %};
+	{%- endif %}
+{% endmacro %}
+{% macro instancePorts(ports) %}
+	{% if ports|length > 0 %}(
+		{% for port in ports %}	.{{ port.name }} ({{ port.variableName }}){% if loop.last == False %},{% endif +%}
+		{% endfor %});{% else %};
+	{%- endif %}
+{% endmacro %}
+{# header #}
+{% for verilogLine in module.verilog.header %}
+	{{- verilogLine }}
+{% endfor %}
+{% if module.verilog.header|length > 0 +%}
+{% endif %}
+{# module #}
+module {{ module.name }}{{ modulePorts(module.ports) }}
+
+{# variables #}
+{% for variable in module.variables -%}
+	{{- variable.type }} {{ portVarSize(variable.size) }}{{ variable.name }};
+{% endfor %}
+{% if module.variables|length > 0 +%}
+{% endif %}
+{# module instance(s) #}
+{% for instance in module.instances %}
+	{{- instance.type }} {{ instance.name }}{{ instancePorts(instance.ports) }}
+	{{ '' }}
+{% endfor %}
+{# code #}
+{% for verilogLine in module.verilog.body %}
+	{{- verilogLine }}
+{% endfor %}
+{% if module.verilog.body|length > 0 +%}
+{% endif %}
+{# assigns #}
+{% for assign in module.assigns %}
+assign {{ assign.variableName }} = {{ assign.value }};
+{% endfor %}
+{% if module.assigns|length > 0 +%}
+{% endif %}
+endmodule
+

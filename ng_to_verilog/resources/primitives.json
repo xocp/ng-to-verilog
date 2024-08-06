@@ -1,0 +1,853 @@
+[
+	{
+		"componentName": "NandGame:PrimitiveComponent:1",
+		"key": "1000",
+		"name": "NAND",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 1
+			},
+			{
+				"label": "B",
+				"width": 1
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 1
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"nand(OUT,A,B);"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:2",
+		"key": "1001",
+		"name": "CLOCK",
+		"inputs": [],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 1
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"reg clock;",
+				"",
+				"assign OUT = clock;",
+				"initial clock = 0;",
+				"always #10 clock = ~clock;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:3",
+		"key": "1002",
+		"name": "SPLIT16",
+		"inputs": [
+			{
+				"label": "IN",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "D15",
+				"width": 1
+			},
+			{
+				"label": "D14",
+				"width": 1
+			},
+			{
+				"label": "D13",
+				"width": 1
+			},
+			{
+				"label": "D12",
+				"width": 1
+			},
+			{
+				"label": "D11",
+				"width": 1
+			},
+			{
+				"label": "D10",
+				"width": 1
+			},
+			{
+				"label": "D9",
+				"width": 1
+			},
+			{
+				"label": "D8",
+				"width": 1
+			},
+			{
+				"label": "D7",
+				"width": 1
+			},
+			{
+				"label": "D6",
+				"width": 1
+			},
+			{
+				"label": "D5",
+				"width": 1
+			},
+			{
+				"label": "D4",
+				"width": 1
+			},
+			{
+				"label": "D3",
+				"width": 1
+			},
+			{
+				"label": "D2",
+				"width": 1
+			},
+			{
+				"label": "D1",
+				"width": 1
+			},
+			{
+				"label": "D0",
+				"width": 1
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign D15 = IN[15:15];",
+				"assign D14 = IN[14:14];",
+				"assign D13 = IN[13:13];",
+				"assign D12 = IN[12:12];",
+				"assign D11 = IN[11:11];",
+				"assign D10 = IN[10:10];",
+				"assign D9 = IN[9:9];",
+				"assign D8 = IN[8:8];",
+				"assign D7 = IN[7:7];",
+				"assign D6 = IN[6:6];",
+				"assign D5 = IN[5:5];",
+				"assign D4 = IN[4:4];",
+				"assign D3 = IN[3:3];",
+				"assign D2 = IN[2:2];",
+				"assign D1 = IN[1:1];",
+				"assign D0 = IN[0:0];"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:4",
+		"key": "1003",
+		"name": "DFF16",
+		"inputs": [
+			{
+				"label": "ST",
+				"width": 1
+			},
+			{
+				"label": "X",
+				"width": 16
+			},
+			{
+				"label": "CLK",
+				"width": 1
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"reg [15:0] R;",
+				"assign OUT = R;",
+				"initial R = 0;",
+				"always@(negedge CLK) begin",
+				"\tif(ST) begin",
+				"\t\tR <= X;",
+				"\tend",
+				"end",
+				""
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:5",
+		"key": "1004",
+		"name": "SELECT16",
+		"inputs": [
+			{
+				"label": "S",
+				"width": 1
+			},
+			{
+				"label": "D1",
+				"width": 16
+			},
+			{
+				"label": "D0",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"verilogType": "reg",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"always @(*) begin",
+				"\tif (S) OUT = D1;",
+				"\telse OUT = D0;",
+				"end"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:6",
+		"key": "1005",
+		"name": "ZERO16",
+		"inputs": [],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = 0;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:7",
+		"key": "1006",
+		"name": "BUNDLE16",
+		"inputs": [
+			{
+				"label": "D15",
+				"width": 1
+			},
+			{
+				"label": "D14",
+				"width": 1
+			},
+			{
+				"label": "D13",
+				"width": 1
+			},
+			{
+				"label": "D12",
+				"width": 1
+			},
+			{
+				"label": "D11",
+				"width": 1
+			},
+			{
+				"label": "D10",
+				"width": 1
+			},
+			{
+				"label": "D9",
+				"width": 1
+			},
+			{
+				"label": "D8",
+				"width": 1
+			},
+			{
+				"label": "D7",
+				"width": 1
+			},
+			{
+				"label": "D6",
+				"width": 1
+			},
+			{
+				"label": "D5",
+				"width": 1
+			},
+			{
+				"label": "D4",
+				"width": 1
+			},
+			{
+				"label": "D3",
+				"width": 1
+			},
+			{
+				"label": "D2",
+				"width": 1
+			},
+			{
+				"label": "D1",
+				"width": 1
+			},
+			{
+				"label": "D0",
+				"width": 1
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = {D15,D14,D13,D12,D11,D10,D9,D8,D7,D6,D5,D4,D3,D2,D1,D0};"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:9",
+		"key": "1008",
+		"name": "CONST",
+		"inputs": [],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body": []
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:10",
+		"key": "1009",
+		"name": "ROM",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"verilogType": "reg",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"always @ (*)",
+				"begin",
+				"\tcase (A)",
+				"%ROM_DATA%",
+				"\tendcase",
+				"end"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:11",
+		"key": "1010",
+		"name": "AND16",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			},
+			{
+				"label": "B",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = A & B;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:12",
+		"key": "1011",
+		"name": "INV16",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = ~A;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:13",
+		"key": "1012",
+		"name": "OR16",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			},
+			{
+				"label": "B",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = A | B;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:14",
+		"key": "1013",
+		"name": "XOR16",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			},
+			{
+				"label": "B",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = A ^ B;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:15",
+		"key": "1014",
+		"name": "ADDC16",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			},
+			{
+				"label": "B",
+				"width": 16
+			},
+			{
+				"label": "C_IN",
+				"width": 1
+			}
+		],
+		"outputs": [
+			{
+				"label": "C",
+				"width": 1
+			},
+			{
+				"label": "S",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign {C, S} = A + B + C_IN;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:16",
+		"key": "1015",
+		"name": "SUB16",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			},
+			{
+				"label": "B",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = A - B;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:17",
+		"key": "1016",
+		"name": "INC16",
+		"inputs": [
+			{
+				"label": "IN",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = IN + 1;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:18",
+		"key": "1017",
+		"name": "ADD16",
+		"inputs": [
+			{
+				"label": "A",
+				"width": 16
+			},
+			{
+				"label": "B",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = A + B;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:19",
+		"key": "1018",
+		"name": "ZERO",
+		"inputs": [],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 1
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign OUT = 0;"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:20",
+		"key": "1019",
+		"name": "SPLIT22",
+		"inputs": [
+			{
+				"label": "IN",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "D21",
+				"width": 1
+			},
+			{
+				"label": "D20",
+				"width": 1
+			},
+			{
+				"label": "D19",
+				"width": 1
+			},
+			{
+				"label": "D18",
+				"width": 1
+			},
+			{
+				"label": "D17",
+				"width": 1
+			},
+			{
+				"label": "D16",
+				"width": 1
+			},
+			{
+				"label": "D15",
+				"width": 1
+			},
+			{
+				"label": "D14",
+				"width": 1
+			},
+			{
+				"label": "D13",
+				"width": 1
+			},
+			{
+				"label": "D12",
+				"width": 1
+			},
+			{
+				"label": "D11",
+				"width": 1
+			},
+			{
+				"label": "D10",
+				"width": 1
+			},
+			{
+				"label": "D9",
+				"width": 1
+			},
+			{
+				"label": "D8",
+				"width": 1
+			},
+			{
+				"label": "D7",
+				"width": 1
+			},
+			{
+				"label": "D6",
+				"width": 1
+			},
+			{
+				"label": "D5",
+				"width": 1
+			},
+			{
+				"label": "D4",
+				"width": 1
+			},
+			{
+				"label": "D3",
+				"width": 1
+			},
+			{
+				"label": "D2",
+				"width": 1
+			},
+			{
+				"label": "D1",
+				"width": 1
+			},
+			{
+				"label": "D0",
+				"width": 1
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"assign D21 = 0;",
+				"assign D20 = 0;",
+				"assign D19 = 0;",
+				"assign D18 = 0;",
+				"assign D17 = 0;",
+				"assign D16 = 0;",
+				"assign D15 = IN[15:15];",
+				"assign D14 = IN[14:14];",
+				"assign D13 = IN[13:13];",
+				"assign D12 = IN[12:12];",
+				"assign D11 = IN[11:11];",
+				"assign D10 = IN[10:10];",
+				"assign D9 = IN[9:9];",
+				"assign D8 = IN[8:8];",
+				"assign D7 = IN[7:7];",
+				"assign D6 = IN[6:6];",
+				"assign D5 = IN[5:5];",
+				"assign D4 = IN[4:4];",
+				"assign D3 = IN[3:3];",
+				"assign D2 = IN[2:2];",
+				"assign D1 = IN[1:1];",
+				"assign D0 = IN[0:0];"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:21",
+		"key": "1020",
+		"name": "RAM16",
+		"inputs": [
+			{
+				"label": "ST",
+				"width": 1
+			},
+			{
+				"label": "X",
+				"width": 16
+			},
+			{
+				"label": "AD",
+				"width": 16
+			},
+			{
+				"label": "CLK",
+				"width": 1
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"verilogType": "reg",
+				"width": 16
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"reg [15:0] memory [0:65535];",
+				"",
+				"always @(posedge CLK) begin",
+				"\tif (ST) begin",
+				"\t\tmemory[AD] <= X;",
+				"\tend",
+				"\tOUT <= memory[AD];",
+				"end"
+			]
+		}
+	}
+]
