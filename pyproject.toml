@@ -4,6 +4,10 @@
 requires = ["setuptools>=69.5.1", "wheel>=0.43.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ng_to_verilog"]
+
 [project]
 name = "ng-to-verilog"
 version = "2024.08.0"

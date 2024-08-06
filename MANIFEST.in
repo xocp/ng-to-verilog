@@ -1,4 +1,4 @@
 # MANIFEST.in
 
-include ng_to_verilog/resources/*.json
-include ng_to_verilog/templates/*.j2
+include src/ng_to_verilog/resources/*.json
+include src/ng_to_verilog/templates/*.j2

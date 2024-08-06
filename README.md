@@ -17,7 +17,17 @@ People end up doing digital logic design from many different starting points. My
 
 ## Getting Started
 
-You can run the provided NgToVerilog.py and it will convert a sample Nandgame export with a custom CPU. You can also uncomment and run the CPU3 export which is the Nandgame computer. You'll have to edit any exported ROMs and copy in specific level code for the Nandgame CPU. The included custom CPU loads a Fibonacci sequence program which is output on a debug port. A basic testbench will be created, but will no doubt need to be modified. In the case of the custom CPU, you will need to add two lines above RST=0; in mrcomputer_tb.v as shown below:
+```
+pip install ng-to-verilog (TBD)
+```
+
+or, from the source root folder
+
+```
+python -m pip install -e .
+```
+
+You can run the provided samples/NgToVerilog.py and it will convert a sample Nandgame export with a custom CPU. You can also uncomment and run the CPU3 export which is the Nandgame computer. You'll have to edit any exported ROMs and copy in specific level code for the Nandgame CPU. The included custom CPU loads a Fibonacci sequence program which is output on a debug port. A basic testbench will be created, but will no doubt need to be modified. In the case of the custom CPU, you will need to add two lines above RST=0; in mrcomputer_tb.v as shown below:
 
 ```python
 // TODO: adjust any reg (input) values here
