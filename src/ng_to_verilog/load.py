@@ -1,6 +1,7 @@
 # https://docs.python-guide.org/writing/structure/
-import os
 import json
+import os
+
 import ng_to_verilog as ngv
 
 
