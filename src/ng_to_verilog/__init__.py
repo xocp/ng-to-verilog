@@ -23,4 +23,3 @@ from .util import is_ng_testbench as is_ng_testbench
 from .util import strip_special_chars as strip_special_chars
 from .util import fix_name as fix_name
 from .util import get_component_id_key_name as get_component_id_key_name
-
