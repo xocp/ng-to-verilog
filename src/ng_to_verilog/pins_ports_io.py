@@ -224,11 +224,7 @@ def fix_ng_inputs_outputs(component):
     # ensure that input and output names are unique
     # this is very simplistic and doesn't account for all scenarios
     for input in component["inputs"]:
-        matches = list(
-            filter(
-                lambda output: output["label"] == input["label"], component["outputs"]
-            )
-        )
+        matches = list(filter(lambda output: output["label"] == input["label"], component["outputs"]))
         if len(matches) > 0:
             input["label"] = f"{input['label']}_IN"
 

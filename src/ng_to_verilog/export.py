@@ -106,12 +106,12 @@ def export(topLevelComponentName, ngData):
     osName = os.name
     if osName == "posix":
         buildScriptExtension = "sh"
-        platformIverilogInstallText = "https://steveicarus.github.io/iverilog/usage/installation.html, apt install iverilog, apt install gtkwave"
+        platformIverilogInstallText = (
+            "https://steveicarus.github.io/iverilog/usage/installation.html, apt install iverilog, apt install gtkwave"
+        )
     elif osName == "nt":
         buildScriptExtension = "cmd"
-        platformIverilogInstallText = (
-            "https://bleyer.org/icarus/, install both iverilog and gtkwave"
-        )
+        platformIverilogInstallText = "https://bleyer.org/icarus/, install both iverilog and gtkwave"
     else:
         raise Exception(f"Unsupported os.name platform of {os.name}")
 
@@ -127,9 +127,7 @@ def export(topLevelComponentName, ngData):
     print(
         f'Export complete. Proceed with editing the testbench file ({ngv.get_output_folder()}/{testbenchComponentName}.v), and then execute "{buildFilename}" in the output directory to build, run and view the simulation results.\n'
     )
-    print(
-        f"Please ensure iverilog and gtkwave ({platformIverilogInstallText}) are installed before proceeding.\n"
-    )
+    print(f"Please ensure iverilog and gtkwave ({platformIverilogInstallText}) are installed before proceeding.\n")
 
 
 def export_module(name_or_key, ngData, env, node=None):
@@ -185,9 +183,7 @@ def build_module(component, ngData, env, node=None):
     for subComponentNode in component["nodes"]:
         subComponentNodeType = subComponentNode["type"]
 
-        subComponent = export_module(
-            subComponentNodeType, ngData, env, subComponentNode
-        )
+        subComponent = export_module(subComponentNodeType, ngData, env, subComponentNode)
         subComponentName = subComponent["name"]
         subComponentNodeInstanceName = f"{subComponentName}_{subComponentNode['id']}"
 
@@ -229,14 +225,10 @@ def build_module(component, ngData, env, node=None):
                     # (since we force outputs to come first elsewhere [and inputs second], and we are looking for inputs to this sub-component)
                     if (
                         target["nodeId"].isnumeric()
-                        and int(target["nodeId"])
-                        == component["nodes"].index(subComponentNode)
-                        and int(target["connectorId"])
-                        == subComponentPortIndex - len(subComponent["outputs"])
+                        and int(target["nodeId"]) == component["nodes"].index(subComponentNode)
+                        and int(target["connectorId"]) == subComponentPortIndex - len(subComponent["outputs"])
                     ):
-                        portInputName = ngv.get_port_input_name(
-                            connection, component, ngData
-                        )
+                        portInputName = ngv.get_port_input_name(connection, component, ngData)
                         break
 
                 if portInputName == _UNDEFINED_PORT:
@@ -309,8 +301,6 @@ def build_module(component, ngData, env, node=None):
 
             for verilogBodyIndex, bodyLine in enumerate(module["verilog"]["body"]):
                 if "%ROM_DATA%" in bodyLine:
-                    module["verilog"]["body"][verilogBodyIndex] = bodyLine.replace(
-                        "%ROM_DATA%", romData
-                    )
+                    module["verilog"]["body"][verilogBodyIndex] = bodyLine.replace("%ROM_DATA%", romData)
 
     return module

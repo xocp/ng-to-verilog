@@ -27,9 +27,7 @@ def set_word_size(size):
     global _word_size
 
     if size > DEFAULT_WORD_SIZE or size < _MIN_WORD_SIZE:
-        raise Exception(
-            f"Word size must be between {_MIN_WORD_SIZE} and {DEFAULT_WORD_SIZE}"
-        )
+        raise Exception(f"Word size must be between {_MIN_WORD_SIZE} and {DEFAULT_WORD_SIZE}")
 
     _word_size = size
 

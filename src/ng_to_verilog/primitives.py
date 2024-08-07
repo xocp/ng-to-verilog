@@ -64,14 +64,10 @@ def fix_ng_primitive_refs(component):
                                 # there is a case where someone might be checking the high bit to see if a signed number is negative
                                 newConnectorId = 0
                             else:
-                                newConnectorId = connectorId - (
-                                    ngv.DEFAULT_WORD_SIZE - word_size
-                                )
+                                newConnectorId = connectorId - (ngv.DEFAULT_WORD_SIZE - word_size)
 
                             if newConnectorId >= 0:
-                                connection[connectionKey]["connectorId"] = str(
-                                    newConnectorId
-                                )
+                                connection[connectionKey]["connectorId"] = str(newConnectorId)
                             else:
                                 raise Exception(
                                     f"You have selected a word_size of {word_size}, but component {component['componentName']} ({component['name']}) has a reference to a {nodeType} that accesses bits outside of the word boundary (i.e. bit {ngv.DEFAULT_WORD_SIZE - connectorId - 1})"
