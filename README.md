@@ -11,6 +11,7 @@ Run your favorite Nandgame creations on real or simulated hardware! Reify your t
 - Compatible with iverilog and your favorite EDA tool / FPGA development boards
 - Uses Jinja2 templating system for Verilog file generation
 - Linux and Windows support
+- Output has been tested in iverilog as well as Vivado
 
 ## Motivation
 

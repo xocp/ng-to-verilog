@@ -1,5 +1,5 @@
 {% macro portVarSize(size) %}
-	{% if size > 1 %}[{{ size }}:0] {% endif %}
+	{% if size > 1 %}[{{ size - 1 }}:0] {% endif %}
 {% endmacro %}
 {% macro modulePorts(ports) %}
 	{% if ports|length > 0 %}(

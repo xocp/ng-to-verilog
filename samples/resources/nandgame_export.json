@@ -1612,8 +1612,26 @@
 			}
 		],
 		"diagram": {
-			"nodes": [],
-			"connections": []
+			"nodes": [
+				{
+					"type": "ZERO16",
+					"x": 200.10415649414062,
+					"y": 208.97570037841797,
+					"id": "0"
+				}
+			],
+			"connections": [
+				{
+					"source": {
+						"nodeId": "0",
+						"connectorId": "0"
+					},
+					"target": {
+						"nodeId": "output",
+						"connectorId": "0"
+					}
+				}
+			]
 		}
 	},
 	"NandGame:Levels:COUNTER": {
@@ -2663,8 +2681,8 @@
 				},
 				{
 					"type": "RAM",
-					"x": 698,
-					"y": 303,
+					"x": 700,
+					"y": 350,
 					"id": "1"
 				},
 				{
@@ -3082,8 +3100,8 @@
 			},
 			{
 				"type": "RAM",
-				"x": 446,
-				"y": 292,
+				"x": 494,
+				"y": 237,
 				"id": "2"
 			}
 		],
