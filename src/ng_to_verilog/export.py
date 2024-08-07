@@ -116,7 +116,7 @@ def export(topLevelComponentName, ngData):
 	buildScriptExtension = ""
 	platformIverilogInstallText = ""
 	
-	osName = os.name;
+	osName = os.name
 	if osName == "posix":
 		buildScriptExtension = "sh"
 		platformIverilogInstallText = "https://steveicarus.github.io/iverilog/usage/installation.html, apt install iverilog, apt install gtkwave"
@@ -275,7 +275,7 @@ def build_module(component, ngData, env, node=None):
 						}
 						module["assigns"].append(assign)
 
-			if not instance is None:
+			if instance is not None:
 				instance["ports"].append(port)
 
 		if instantiateModule:

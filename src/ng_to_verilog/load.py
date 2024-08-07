@@ -12,7 +12,7 @@ def load_ng_data(filename):
 	# First, filter out any items that are code or lists (these won't represent entries we want to process)
 	# also add an entry with the parent's key as the value for each dict in the list
 	ngData = [{"componentName":key} | value for (key,value) in ngData.items() \
-			if not ('code' in value) and not isinstance(value,list) and not key in ["NandGame:Levels:OPCODES2", "NandGame:Levels:IO2", "NandGame:Levels:RELAY_NAND"]]
+			if 'code' not in value and not isinstance(value,list) and key not in ["NandGame:Levels:OPCODES2", "NandGame:Levels:IO2", "NandGame:Levels:RELAY_NAND"]]
 
 	# merge primitive definitions
 	with open(f"{os.path.dirname(ngv.__file__)}/resources/primitives.json") as f:

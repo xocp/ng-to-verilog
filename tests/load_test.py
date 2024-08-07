@@ -1,3 +1,3 @@
-from .context import ng_to_verilog
+# from .context import ng_to_verilog
 
 pass
