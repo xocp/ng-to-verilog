@@ -116,15 +116,15 @@ def export(topLevelComponentName, ngData):
 	buildScriptExtension = ""
 	platformIverilogInstallText = ""
 	
-	match os.name:
-		case "posix":
-			buildScriptExtension = "sh"
-			platformIverilogInstallText = "https://steveicarus.github.io/iverilog/usage/installation.html, apt install iverilog, apt install gtkwave"
-		case "nt":
-			buildScriptExtension = "cmd"
-			platformIverilogInstallText = "https://bleyer.org/icarus/"
-		case _:
-			raise Exception(f"Unsupported os.name platform of {os.name}")
+	osName = os.name;
+	if osName == "posix":
+		buildScriptExtension = "sh"
+		platformIverilogInstallText = "https://steveicarus.github.io/iverilog/usage/installation.html, apt install iverilog, apt install gtkwave"
+	elif osName == "nt":
+		buildScriptExtension = "cmd"
+		platformIverilogInstallText = "https://bleyer.org/icarus/, install both iverilog and gtkwave"
+	else:
+		raise Exception(f"Unsupported os.name platform of {os.name}")
 
 	buildFilename = f"{ngv.get_output_folder()}/build{testbenchComponentName}.{buildScriptExtension}"
 	with open(buildFilename, "w") as build_file:
@@ -219,45 +219,45 @@ def build_module(component, ngData, env, node=None):
 				"variableName" : ""
 			}
 			
-			match subComponentPort["type"]:
-				case "input":
-					portInputName = _UNDEFINED_PORT
+			subComponentPortType = subComponentPort["type"]
+			if subComponentPortType == "input":
+				portInputName = _UNDEFINED_PORT
 
-					# json "connections" are one of the following:
-					# 	module input to component input
-					# 	component output (wire) to component input
-					# 	component output (wire) to module output
-					# 	module input to module output
+				# json "connections" are one of the following:
+				# 	module input to component input
+				# 	component output (wire) to component input
+				# 	component output (wire) to module output
+				# 	module input to module output
 
-					# search component connections for a target that matches this sub-component's nodeId; the source is the corresponding input
-					for connection in component["connections"]:
-						target = connection["target"]
+				# search component connections for a target that matches this sub-component's nodeId; the source is the corresponding input
+				for connection in component["connections"]:
+					target = connection["target"]
 
-						# offset subComponentPortIndex here with the number of output ports
-						# (since we force outputs to come first elsewhere [and inputs second], and we are looking for inputs to this sub-component)
-						if target["nodeId"].isnumeric() and \
-							int(target["nodeId"]) == component["nodes"].index(subComponentNode) and \
-							int(target["connectorId"]) == subComponentPortIndex - len(subComponent["outputs"]):
+					# offset subComponentPortIndex here with the number of output ports
+					# (since we force outputs to come first elsewhere [and inputs second], and we are looking for inputs to this sub-component)
+					if target["nodeId"].isnumeric() and \
+						int(target["nodeId"]) == component["nodes"].index(subComponentNode) and \
+						int(target["connectorId"]) == subComponentPortIndex - len(subComponent["outputs"]):
 
-							portInputName = ngv.get_port_input_name(connection, component, ngData)
-							break
+						portInputName = ngv.get_port_input_name(connection, component, ngData)
+						break
 
-					if portInputName == _UNDEFINED_PORT:
-						# input port is not connected to anything, likely a scenario where Nandgame allows a floating input; don't allow here
-						raise Exception(f"Component inputs must be tied to something, likely you are missing connecting this to a ZERO input. Component: {component['componentName']}, Component Name: {component['name']} sub-component: {subComponentName}, input port: {subComponentPort['label']}")
+				if portInputName == _UNDEFINED_PORT:
+					# input port is not connected to anything, likely a scenario where Nandgame allows a floating input; don't allow here
+					raise Exception(f"Component inputs must be tied to something, likely you are missing connecting this to a ZERO input. Component: {component['componentName']}, Component Name: {component['name']} sub-component: {subComponentName}, input port: {subComponentPort['label']}")
 
-					port["variableName"] = portInputName
+				port["variableName"] = portInputName
 
-					if ngv.is_ng_testbench(component):
-						# create a reg in the variables section for the input
-						variable = {
-							"type" : "reg",
-							"size" : subComponentPort["width"],
-							"name" : portInputName
-						}
-						module["variables"].append(variable)
+				if ngv.is_ng_testbench(component):
+					# create a reg in the variables section for the input
+					variable = {
+						"type" : "reg",
+						"size" : subComponentPort["width"],
+						"name" : portInputName
+					}
+					module["variables"].append(variable)
 
-				case "output":
+			elif subComponentPortType == "output":
 					# define a wire for each output
 					variable = {
 							"type" : "wire",

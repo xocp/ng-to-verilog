@@ -17,91 +17,90 @@ def get_ng_level_io_pins(levelName):
 
 	wordSize = ngv.get_word_size()
 
-	match levelName:
-		case "AND" | "XOR" | "OR":
-			inputs = [create_ng_pin("A",1), create_ng_pin("B",1)]
-			outputs = [create_ng_pin("OUT",1)]
-		case "SIGN":
-			name = "ISNEG"
-			inputs = [create_ng_pin("IN", wordSize)]
-			outputs = [create_ng_pin("IS_NEG", 1)]
-		case "FULLADD":
-			inputs = [create_ng_pin("A",1), create_ng_pin("B",1), create_ng_pin("C",1)]
-			outputs = [create_ng_pin("H",1), create_ng_pin("L",1)]
-		case "DEMUX":
-			inputs = [create_ng_pin("S",1), create_ng_pin("D", 1)]
-			outputs = [create_ng_pin("C1",1), create_ng_pin("C0",1)]
-		case "COUNTER":
-			inputs = [create_ng_pin("ST",1), create_ng_pin("X", wordSize), create_ng_pin("CLK",1)]
-			outputs = [create_ng_pin("OUT", wordSize)]
-		case "MULTIPLEXER":
-			inputs = [create_ng_pin("S",1), create_ng_pin("D1",1), create_ng_pin("D0",1)]
-			outputs = [create_ng_pin("OUT",1)]
-		case "CPU3":
-			pass
-		case "CPU_STATE":
-			name = "STATE"
-			inputs = [create_ng_pin("A_IN",1), create_ng_pin("D_IN",1), create_ng_pin("STAR_A_IN",1), create_ng_pin("X", wordSize), create_ng_pin("CLK",1)]
-			outputs = [create_ng_pin("A",1), create_ng_pin("D",1), create_ng_pin("STAR_A",1)]
-		case "RAM":
-			inputs = [create_ng_pin("AD", 1), create_ng_pin("ST",1), create_ng_pin("X", wordSize), create_ng_pin("CLK",1)]
-			outputs = [create_ng_pin("OUT", wordSize)]
-		case "SUB":
-			inputs = [create_ng_pin("A", wordSize), create_ng_pin("B", wordSize)]
-			outputs = [create_ng_pin("OUT", wordSize)]
-		case "ALU2":
-			inputs = [create_ng_pin("U",1), create_ng_pin("PP1",1), create_ng_pin("PP0",1), create_ng_pin("ZX",1), create_ng_pin("SW",1), create_ng_pin("X", wordSize), create_ng_pin("Y", wordSize)]
-			outputs = [create_ng_pin("OUT", wordSize)]
-		case "ALU_INSTRUCTION":
-			inputs = [create_ng_pin("I", wordSize), create_ng_pin("A_IN", wordSize), create_ng_pin("D_IN", wordSize), create_ng_pin("STAR_A_IN", wordSize)]
-			outputs = [create_ng_pin("R", wordSize), create_ng_pin("A",1), create_ng_pin("D",1), create_ng_pin("STAR_A",1), create_ng_pin("J",1)]
-		case "ALU_LOGIC":
-			name = "LOGIC_UNIT"
-			inputs = [create_ng_pin("PP1",1), create_ng_pin("PP0",1), create_ng_pin("X", wordSize), create_ng_pin("Y", wordSize)]
-			outputs = [create_ng_pin("OUT", wordSize)]
-		case "DFF2":
-			inputs = [create_ng_pin("ST",1), create_ng_pin("D1",1), create_ng_pin("D0",1), create_ng_pin("CLK",1)]
-			outputs = [create_ng_pin("D1",1), create_ng_pin("D0",1)]
-		case "CONTROL_UNIT":
-			inputs = [create_ng_pin("I", wordSize), create_ng_pin("A_IN", wordSize), create_ng_pin("D", wordSize), create_ng_pin("STAR_A", wordSize)]
-			outputs = [create_ng_pin("R", wordSize), create_ng_pin("A",1), create_ng_pin("D",1), create_ng_pin("STAR_A",1), create_ng_pin("J",1)]
-		case "ISZERO":
-			inputs = [create_ng_pin("B3",1), create_ng_pin("B2",1), create_ng_pin("B1",1), create_ng_pin("B0",1)]
-			outputs = [create_ng_pin("OUT",1)]
-		case "INV":
-			inputs = [create_ng_pin("IN",1)]
-			outputs = [create_ng_pin("OUT",1)]
-		case "CONDITION":
-			name = "CONDITION2"
-			inputs = [create_ng_pin("LT",1), create_ng_pin("EQ",1), create_ng_pin("GT",1), create_ng_pin("X", wordSize)]
-			outputs = [create_ng_pin("OUT",1)]
-		case "HALFADD":
-			inputs = [create_ng_pin("A",1), create_ng_pin("B",1)]
-			outputs = [create_ng_pin("H",1), create_ng_pin("L",1)]
-		case "SR_LATCH":
-			inputs = [create_ng_pin("S",1), create_ng_pin("R",1)]
-			outputs = [create_ng_pin("OUT",1)]
-		case "IO2":
-			inputs = [create_ng_pin("",1)]
-			outputs = [create_ng_pin("",1)]
-		case "ALU_ARITHMETIC":
-			name = "ARITHMETIC_UNIT"
-			inputs = [create_ng_pin("PP1",1), create_ng_pin("PP0",1), create_ng_pin("X", wordSize), create_ng_pin("Y", wordSize)]
-			outputs = [create_ng_pin("OUT", wordSize)]
-		case "INC":
-			inputs = [create_ng_pin("IN", wordSize)]
-			outputs = [create_ng_pin("OUT", wordSize)]
-		case "ADD2":
-			inputs = [create_ng_pin("A1",1), create_ng_pin("A0",1), create_ng_pin("B1",1), create_ng_pin("B0",1), create_ng_pin("C_IN",1)]
-			outputs = [create_ng_pin("C",1), create_ng_pin("S1",1), create_ng_pin("S0",1)]
-		case "LATCH":
-			inputs = [create_ng_pin("ST",1), create_ng_pin("D",1)]
-			outputs = [create_ng_pin("OUT",1)]
-		case "DFF":
-			inputs = [create_ng_pin("ST",1), create_ng_pin("D",1), create_ng_pin("CLK",1)]
-			outputs = [create_ng_pin("OUT",1)]
-		case _:
-			raise Exception(f"Unknown Nandgame level: '{levelName}'")
+	if levelName in ["AND", "XOR", "OR"]:
+		inputs = [create_ng_pin("A",1), create_ng_pin("B",1)]
+		outputs = [create_ng_pin("OUT",1)]
+	elif levelName == "SIGN":
+		name = "ISNEG"
+		inputs = [create_ng_pin("IN", wordSize)]
+		outputs = [create_ng_pin("IS_NEG", 1)]
+	elif levelName == "FULLADD":
+		inputs = [create_ng_pin("A",1), create_ng_pin("B",1), create_ng_pin("C",1)]
+		outputs = [create_ng_pin("H",1), create_ng_pin("L",1)]
+	elif levelName == "DEMUX":
+		inputs = [create_ng_pin("S",1), create_ng_pin("D", 1)]
+		outputs = [create_ng_pin("C1",1), create_ng_pin("C0",1)]
+	elif levelName == "COUNTER":
+		inputs = [create_ng_pin("ST",1), create_ng_pin("X", wordSize), create_ng_pin("CLK",1)]
+		outputs = [create_ng_pin("OUT", wordSize)]
+	elif levelName == "MULTIPLEXER":
+		inputs = [create_ng_pin("S",1), create_ng_pin("D1",1), create_ng_pin("D0",1)]
+		outputs = [create_ng_pin("OUT",1)]
+	elif levelName == "CPU3":
+		pass
+	elif levelName == "CPU_STATE":
+		name = "STATE"
+		inputs = [create_ng_pin("A_IN",1), create_ng_pin("D_IN",1), create_ng_pin("STAR_A_IN",1), create_ng_pin("X", wordSize), create_ng_pin("CLK",1)]
+		outputs = [create_ng_pin("A",1), create_ng_pin("D",1), create_ng_pin("STAR_A",1)]
+	elif levelName == "RAM":
+		inputs = [create_ng_pin("AD", 1), create_ng_pin("ST",1), create_ng_pin("X", wordSize), create_ng_pin("CLK",1)]
+		outputs = [create_ng_pin("OUT", wordSize)]
+	elif levelName == "SUB":
+		inputs = [create_ng_pin("A", wordSize), create_ng_pin("B", wordSize)]
+		outputs = [create_ng_pin("OUT", wordSize)]
+	elif levelName == "ALU2":
+		inputs = [create_ng_pin("U",1), create_ng_pin("PP1",1), create_ng_pin("PP0",1), create_ng_pin("ZX",1), create_ng_pin("SW",1), create_ng_pin("X", wordSize), create_ng_pin("Y", wordSize)]
+		outputs = [create_ng_pin("OUT", wordSize)]
+	elif levelName == "ALU_INSTRUCTION":
+		inputs = [create_ng_pin("I", wordSize), create_ng_pin("A_IN", wordSize), create_ng_pin("D_IN", wordSize), create_ng_pin("STAR_A_IN", wordSize)]
+		outputs = [create_ng_pin("R", wordSize), create_ng_pin("A",1), create_ng_pin("D",1), create_ng_pin("STAR_A",1), create_ng_pin("J",1)]
+	elif levelName == "ALU_LOGIC":
+		name = "LOGIC_UNIT"
+		inputs = [create_ng_pin("PP1",1), create_ng_pin("PP0",1), create_ng_pin("X", wordSize), create_ng_pin("Y", wordSize)]
+		outputs = [create_ng_pin("OUT", wordSize)]
+	elif levelName == "DFF2":
+		inputs = [create_ng_pin("ST",1), create_ng_pin("D1",1), create_ng_pin("D0",1), create_ng_pin("CLK",1)]
+		outputs = [create_ng_pin("D1",1), create_ng_pin("D0",1)]
+	elif levelName == "CONTROL_UNIT":
+		inputs = [create_ng_pin("I", wordSize), create_ng_pin("A_IN", wordSize), create_ng_pin("D", wordSize), create_ng_pin("STAR_A", wordSize)]
+		outputs = [create_ng_pin("R", wordSize), create_ng_pin("A",1), create_ng_pin("D",1), create_ng_pin("STAR_A",1), create_ng_pin("J",1)]
+	elif levelName == "ISZERO":
+		inputs = [create_ng_pin("B3",1), create_ng_pin("B2",1), create_ng_pin("B1",1), create_ng_pin("B0",1)]
+		outputs = [create_ng_pin("OUT",1)]
+	elif levelName == "INV":
+		inputs = [create_ng_pin("IN",1)]
+		outputs = [create_ng_pin("OUT",1)]
+	elif levelName == "CONDITION":
+		name = "CONDITION2"
+		inputs = [create_ng_pin("LT",1), create_ng_pin("EQ",1), create_ng_pin("GT",1), create_ng_pin("X", wordSize)]
+		outputs = [create_ng_pin("OUT",1)]
+	elif levelName == "HALFADD":
+		inputs = [create_ng_pin("A",1), create_ng_pin("B",1)]
+		outputs = [create_ng_pin("H",1), create_ng_pin("L",1)]
+	elif levelName == "SR_LATCH":
+		inputs = [create_ng_pin("S",1), create_ng_pin("R",1)]
+		outputs = [create_ng_pin("OUT",1)]
+	elif levelName == "IO2":
+		inputs = [create_ng_pin("",1)]
+		outputs = [create_ng_pin("",1)]
+	elif levelName == "ALU_ARITHMETIC":
+		name = "ARITHMETIC_UNIT"
+		inputs = [create_ng_pin("PP1",1), create_ng_pin("PP0",1), create_ng_pin("X", wordSize), create_ng_pin("Y", wordSize)]
+		outputs = [create_ng_pin("OUT", wordSize)]
+	elif levelName == "INC":
+		inputs = [create_ng_pin("IN", wordSize)]
+		outputs = [create_ng_pin("OUT", wordSize)]
+	elif levelName == "ADD2":
+		inputs = [create_ng_pin("A1",1), create_ng_pin("A0",1), create_ng_pin("B1",1), create_ng_pin("B0",1), create_ng_pin("C_IN",1)]
+		outputs = [create_ng_pin("C",1), create_ng_pin("S1",1), create_ng_pin("S0",1)]
+	elif levelName == "LATCH":
+		inputs = [create_ng_pin("ST",1), create_ng_pin("D",1)]
+		outputs = [create_ng_pin("OUT",1)]
+	elif levelName == "DFF":
+		inputs = [create_ng_pin("ST",1), create_ng_pin("D",1), create_ng_pin("CLK",1)]
+		outputs = [create_ng_pin("OUT",1)]
+	else:
+		raise Exception(f"Unknown Nandgame level: '{levelName}'")
 
 	return (name, inputs, outputs)
 

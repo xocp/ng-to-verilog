@@ -21,16 +21,15 @@ def fix_ng_primitives(ngData):
 				component["name"] = updatedComponentName
 
 				# the following primitives need special handling
-				match componentName:
-					case "SPLIT16":
-						nameDictionary[componentName]["fixConnectionKey"] = "source"
-						while component["outputs"][0]["label"] != f"D{word_size - 1}":
-							del component["outputs"][0]
-					case "BUNDLE16":
-						nameDictionary[componentName]["fixConnectionKey"] = "target"
-						while component["inputs"][0]["label"] != f"D{word_size - 1}":
-							del component["inputs"][0]
-						pass
+				if componentName == "SPLIT16":
+					nameDictionary[componentName]["fixConnectionKey"] = "source"
+					while component["outputs"][0]["label"] != f"D{word_size - 1}":
+						del component["outputs"][0]
+				elif componentName == "BUNDLE16":
+					nameDictionary[componentName]["fixConnectionKey"] = "target"
+					while component["inputs"][0]["label"] != f"D{word_size - 1}":
+						del component["inputs"][0]
+					pass
 
 	ngv.set_primitive_name_dictionary(nameDictionary)
 

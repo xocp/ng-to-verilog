@@ -10,6 +10,7 @@ Run your favorite Nandgame creations on real or simulated hardware! Reify your t
 - Automatic generation of testbench files, Verilog source code and primitives
 - Compatible with iverilog and your favorite EDA tool / FPGA development boards
 - Uses Jinja2 templating system for Verilog file generation
+- Linux and Windows support
 
 ## Motivation
 
