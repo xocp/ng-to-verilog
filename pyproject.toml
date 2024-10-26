@@ -8,6 +8,16 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 include = ["ng_to_verilog"]
 
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+pythonpath = [
+	"src"
+]
+testpaths = [
+    "tests"
+]
+
 [project]
 name = "ng-to-verilog"
 version = "2024.10.27"
