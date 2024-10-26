@@ -10,7 +10,7 @@ include = ["ng_to_verilog"]
 
 [project]
 name = "ng-to-verilog"
-version = "2024.08.0"
+version = "2024.10.27"
 description = "Nandgame to Verilog"
 readme = "README.md"
 authors = [{ name = "Patrick Cox", email = "patrick.cox@gmail.com" }]

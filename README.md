@@ -20,7 +20,7 @@ People end up doing digital logic design from many different starting points. My
 ## Getting Started
 
 ```
-pip install ng-to-verilog (TBD)
+pip install ng-to-verilog
 ```
 
 or, from the root folder of the repo
