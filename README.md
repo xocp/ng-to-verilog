@@ -38,6 +38,7 @@ RST = 0;
 #10000;
 ```
 
+Sample GTKWave output, showing the Fibonacci sequence on a debug port
 ![Sample GTKWave Output](https://github.com/xocp/ng-to-verilog/blob/main/images/mrcomputer_gtkwave_sample.png?raw=true)
 
 ## Credits
