@@ -24,7 +24,6 @@ pip install ng-to-verilog
 ```
 
 or, from the root folder of the repo
-
 ```
 python -m pip install -e .
 ```
@@ -38,6 +37,8 @@ RST = 1;
 RST = 0;
 #10000;
 ```
+
+![Sample GTKWave Output](https://github.com/xocp/ng-to-verilog/blob/main/images/mrcomputer_gtkwave_sample.png?raw=true)
 
 ## Credits
 - To Olav Junker Kjær, the creator of [Nandgame](https://nandgame.com/) who has undoubtedly inspired more generations of people into the world of digital logic. Kudos.
