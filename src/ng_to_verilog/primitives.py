@@ -2,7 +2,6 @@ import ng_to_verilog as ngv
 
 # add/update primitive definitions in primitives.json
 
-
 def fix_ng_primitives(ngData):
     word_size = ngv.get_word_size()
 

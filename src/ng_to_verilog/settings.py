@@ -4,7 +4,6 @@ DEFAULT_WORD_SIZE = 16
 # override this below by calling set_word_size if you've used Nandgame to create a computer with other than a 16-bit word size
 _word_size = DEFAULT_WORD_SIZE
 _output_folder = "_output"
-_exported_components = []
 _primitiveNameDictionary = None
 
 

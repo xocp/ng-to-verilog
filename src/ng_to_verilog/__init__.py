@@ -13,9 +13,11 @@ from .pins_ports_io import fix_ng_inputs_outputs as fix_ng_inputs_outputs
 from .pins_ports_io import get_ng_level_io_pins as get_ng_level_io_pins
 
 from .settings import get_word_size as get_word_size
+from .settings import set_word_size as set_word_size
 from .settings import get_output_folder as get_output_folder
 from .settings import set_output_folder as set_output_folder
 from .settings import get_primitive_name_dictionary as get_primitive_name_dictionary
+from .settings import set_primitive_name_dictionary as set_primitive_name_dictionary
 from .settings import DEFAULT_WORD_SIZE as DEFAULT_WORD_SIZE
 
 from .util import is_ng_primitive as is_ng_primitive
