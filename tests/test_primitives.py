@@ -9,7 +9,7 @@ def test_fix_ng_primitives():
 	ngv.fix_ng_primitives(ng_data)
 	assert len(ngv.get_primitive_name_dictionary()) == 0
 
-	ngv.settings.set_word_size(8)
+	ngv.set_word_size(8)
 	ngv.fix_ng_primitives(ng_data)
 	new_name_dict = ngv.get_primitive_name_dictionary()
 	assert len(new_name_dict) > 0
