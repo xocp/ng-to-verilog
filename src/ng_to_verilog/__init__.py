@@ -18,6 +18,9 @@ from .settings import get_output_folder as get_output_folder
 from .settings import set_output_folder as set_output_folder
 from .settings import get_primitive_name_dictionary as get_primitive_name_dictionary
 from .settings import set_primitive_name_dictionary as set_primitive_name_dictionary
+from .settings import get_target_platform as get_target_platform
+from .settings import set_target_platform as set_target_platform
+from .settings import TargetPlatform as TargetPlatform
 from .settings import DEFAULT_WORD_SIZE as DEFAULT_WORD_SIZE
 
 from .util import is_ng_primitive as is_ng_primitive

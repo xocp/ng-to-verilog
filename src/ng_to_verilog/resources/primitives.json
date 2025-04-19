@@ -195,7 +195,7 @@
 				"reg [15:0] R;",
 				"assign OUT = R;",
 				"initial R = 0;",
-				"always@(negedge CLK) begin",
+				"always@({trigger} CLK) begin",
 				"\tif(ST) begin",
 				"\t\tR <= X;",
 				"\tend",

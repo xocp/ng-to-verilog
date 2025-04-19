@@ -4,7 +4,6 @@ import os
 
 _UNDEFINED_PORT = "undefined"
 
-
 def get_component(identifier, ngData):
     keyName = ngv.get_component_id_key_name(identifier)
 
@@ -101,15 +100,15 @@ def export(topLevelComponentName, ngData):
     buildScriptTemplate = env.get_template("build.j2")
 
     buildScriptExtension = ""
-    platformIverilogInstallText = ""
+    platformInstallText = ""
 
     osName = os.name
     if osName == "posix":
         buildScriptExtension = "sh"
-        platformIverilogInstallText = "https://steveicarus.github.io/iverilog/usage/installation.html, apt install iverilog, apt install gtkwave"
+        platformInstallText = "https://steveicarus.github.io/iverilog/usage/installation.html, apt install iverilog, apt install gtkwave"
     elif osName == "nt":
         buildScriptExtension = "cmd"
-        platformIverilogInstallText = (
+        platformInstallText = (
             "https://bleyer.org/icarus/, install both iverilog and gtkwave"
         )
     else:
@@ -128,7 +127,7 @@ def export(topLevelComponentName, ngData):
         f'Export complete. Proceed with editing the testbench file ({ngv.get_output_folder()}/{testbenchComponentName}.v), and then execute "{buildFilename}" in the output directory to build, run and view the simulation results.\n'
     )
     print(
-        f"Please ensure iverilog and gtkwave ({platformIverilogInstallText}) are installed before proceeding.\n"
+        f"Please ensure iverilog and gtkwave ({platformInstallText}) are installed before proceeding (or use other software of your choice).\n"
     )
 
 

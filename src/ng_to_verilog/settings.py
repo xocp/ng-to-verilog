@@ -1,3 +1,10 @@
+from enum import Enum
+
+class TargetPlatform(Enum):
+    Default = 0
+    IVerilog = 1
+    Vivado = 2
+
 _MIN_WORD_SIZE = 2
 DEFAULT_WORD_SIZE = 16
 
@@ -5,6 +12,16 @@ DEFAULT_WORD_SIZE = 16
 _word_size = DEFAULT_WORD_SIZE
 _output_folder = "_output"
 _primitiveNameDictionary = None
+_targetPlatform = TargetPlatform.Default
+
+def get_target_platform():
+	global _targetPlatform
+	return _targetPlatform
+
+
+def set_target_platform(targetPlatform):
+	global _targetPlatform
+	_targetPlatform = targetPlatform
 
 
 def get_primitive_name_dictionary():
