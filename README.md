@@ -28,7 +28,7 @@ or, from the root folder of the repo
 python -m pip install -e .
 ```
 
-You can run the provided samples/NgToVerilog.py and it will convert a sample Nandgame export with a custom CPU. You can also uncomment and run the CPU3 export which is the Nandgame computer. You'll have to edit any exported ROMs and copy in specific level code for the Nandgame CPU. The included custom CPU loads a Fibonacci sequence program which is output on a debug port. A basic testbench will be created, but will no doubt need to be modified. In the case of the custom CPU, you will need to add two lines above RST=0; in mrcomputer_tb.v as shown below:
+You can run the provided example via `python3 samples/NgToVerilog.py` and it will convert a sample Nandgame export with a custom CPU into Icarus Verilog compatible output (see below for a Vivado output and FPGA synthesis using an Arty S7-25 development board). Build scripts will be generated for Icarus Verilog / GtkWave along with instructions output to the python console. You can also uncomment and run the CPU3 export which is the Nandgame computer. You'll have to edit any exported ROMs and copy in specific level code for the Nandgame CPU. The included custom CPU loads a Fibonacci sequence program which is output on a debug port. A basic testbench will be created, but will no doubt need to be modified. In the case of the custom CPU, you will need to add two lines above RST=0; in mrcomputer_tb.v as shown below:
 
 ```python
 // TODO: adjust any reg (input) values here
