@@ -2,6 +2,7 @@ __pycache__/
 _output/
 ng_to_verilog.egg-info/
 dist/
+build/
 .ruff_cache/
 .sv_cache/
 .pytest_cache/
