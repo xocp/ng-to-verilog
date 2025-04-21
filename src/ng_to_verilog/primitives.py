@@ -16,11 +16,17 @@ def fix_ng_primitives(ngData):
             componentName = component["name"]
             
             if componentName == "DFF16":
-                if ngv.get_target_platform == ngv.TargetPlatform.IVerilog:
-                    triggerValue = "negedge"
+                if ngv.get_register_trigger() == ngv.RegisterTrigger.Default:
+                    if ngv.get_target_platform == ngv.TargetPlatform.IVerilog:
+                        triggerValue = "negedge"
+                    else:
+                        triggerValue = "posedge"
                 else:
-                    triggerValue = "posedge"
-                
+                    if ngv.get_register_trigger() == ngv.RegisterTrigger.Negedge:
+                        triggerValue = "negedge"
+                    else:
+                        triggerValue = "posedge"
+                    
                 component["verilog"]["body"] = component["verilog"]["body"].replace(r"{trigger}", triggerValue)
 
             if componentName.endswith("16"):

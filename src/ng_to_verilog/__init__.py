@@ -20,6 +20,9 @@ from .settings import get_primitive_name_dictionary as get_primitive_name_dictio
 from .settings import set_primitive_name_dictionary as set_primitive_name_dictionary
 from .settings import get_target_platform as get_target_platform
 from .settings import set_target_platform as set_target_platform
+from .settings import get_register_trigger as get_register_trigger
+from .settings import set_register_trigger as set_register_trigger
+from .settings import RegisterTrigger as RegisterTrigger
 from .settings import TargetPlatform as TargetPlatform
 from .settings import DEFAULT_WORD_SIZE as DEFAULT_WORD_SIZE
 
