@@ -102,6 +102,27 @@ def get_ng_level_io_pins(levelName):
             create_ng_pin("CLK", 1),
         ]
         outputs = [create_ng_pin("D1", 1), create_ng_pin("D0", 1)]
+    elif levelName == "CONTROL_SELECTOR":
+        inputs = [
+            create_ng_pin("S", 1),
+            create_ng_pin("R1", 16),
+            create_ng_pin("A1", 1),
+            create_ng_pin("D1", 1),
+            create_ng_pin("STAR_A1", 1),
+            create_ng_pin("J1", 1),
+            create_ng_pin("R0", 16),
+            create_ng_pin("A0", 1),
+            create_ng_pin("D0", 1),
+            create_ng_pin("STAR_A0", 1),
+            create_ng_pin("J0", 1)
+		]
+        outputs = [
+            create_ng_pin("R", 16),
+            create_ng_pin("A", 1),
+            create_ng_pin("D", 1),
+            create_ng_pin("STAR_A", 1),
+            create_ng_pin("J", 1)
+		]
     elif levelName == "CONTROL_UNIT":
         inputs = [
             create_ng_pin("I", wordSize),

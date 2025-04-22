@@ -5,9 +5,6 @@ import ng_to_verilog as ngv
 def fix_ng_primitives(ngData):
     word_size = ngv.get_word_size()
 
-    if word_size == ngv.DEFAULT_WORD_SIZE:
-        return
-
     nameDictionary = {}
 
     # fix up the default 16-bit primitives to the selected word size
@@ -16,20 +13,16 @@ def fix_ng_primitives(ngData):
             componentName = component["name"]
             
             if componentName == "DFF16":
-                if ngv.get_register_trigger() == ngv.RegisterTrigger.Default:
-                    if ngv.get_target_platform == ngv.TargetPlatform.IVerilog:
-                        triggerValue = "negedge"
-                    else:
-                        triggerValue = "posedge"
+                if ngv.get_register_trigger() == ngv.RegisterTrigger.Negedge:
+                    triggerValue = "negedge"
                 else:
-                    if ngv.get_register_trigger() == ngv.RegisterTrigger.Negedge:
-                        triggerValue = "negedge"
-                    else:
-                        triggerValue = "posedge"
-                    
-                component["verilog"]["body"] = component["verilog"]["body"].replace(r"{trigger}", triggerValue)
+                    triggerValue = "posedge"
+                
+				# iterate over list of strings, replace {trigger} with triggerValue
+                for i in range(len(component["verilog"]["body"])):
+                    component["verilog"]["body"][i] = component["verilog"]["body"][i].replace(r"{trigger}", triggerValue)
 
-            if componentName.endswith("16"):
+            if componentName.endswith("16") and word_size != ngv.DEFAULT_WORD_SIZE:
                 updatedComponentName = f"{componentName[0:-2]}{word_size}"
                 nameDictionary[componentName] = {"newName": updatedComponentName}
                 component["name"] = updatedComponentName
