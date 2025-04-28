@@ -41,6 +41,33 @@ RST = 0;
 Sample GTKWave output, showing the Fibonacci sequence on a debug port
 ![Sample GTKWave Output](https://github.com/xocp/ng-to-verilog/blob/main/images/mrcomputer_gtkwave_sample.png?raw=true)
 
+## FPGA Notes
+[Clock Divider](https://gist.github.com/Thraetaona/ba941e293d36d0f76db6b9f3476b823c)
+
+Replace this statement in mrcomputer.v:
+
+Add a CLK input above the RST input
+Replace the following
+CLOCK CLOCK_0(
+	.OUT (CLOCK_0_OUT)
+);
+with
+assign CLOCK_0_OUT = CLK;
+
+Update these lines in mrcomputer_tb.v
+wire ce_out_1hz;
+mrcomputer mrcomputer_0(
+	.OUT0 (mrcomputer_0_OUT0),
+	.OUT1 (mrcomputer_0_OUT1),
+	.CLK (ce_out_1hz),
+	.RST (RST)
+);
+
+BUFGCE
+
+Constraints file should have CLK100MHZ defined
+
+
 ## Credits
 - To Olav Junker Kjær, the creator of [Nandgame](https://nandgame.com/) who has undoubtedly inspired more generations of people into the world of digital logic. Kudos.
 

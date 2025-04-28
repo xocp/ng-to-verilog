@@ -195,7 +195,7 @@
 				"reg [15:0] R;",
 				"assign OUT = R;",
 				"initial R = 0;",
-				"always@({trigger} CLK) begin",
+				"always @(posedge CLK) begin",
 				"\tif(ST) begin",
 				"\t\tR <= X;",
 				"\tend",
@@ -384,7 +384,6 @@
 		"outputs": [
 			{
 				"label": "OUT",
-				"verilogType": "reg",
 				"width": 16
 			}
 		],
@@ -395,8 +394,11 @@
 			"header": [],
 			"body":
 			[
-				"always @ (*)",
-				"begin",
+				"reg [15:0] D;",
+				"initial D = 0;",
+				"assign OUT = D;",
+				"",
+				"always @(*) begin",
 				"\tcase (A)",
 				"%ROM_DATA%",
 				"\tendcase",
@@ -837,7 +839,6 @@
 		"outputs": [
 			{
 				"label": "OUT",
-				"verilogType": "reg",
 				"width": 16
 			}
 		],
@@ -848,14 +849,55 @@
 			"header": [],
 			"body":
 			[
-				"reg [15:0] memory [0:65535];",
+				"reg [15:0] memory [0:255];",
+				"assign OUT = memory[AD];",
 				"",
 				"always @(posedge CLK) begin",
 				"\tif (ST) begin",
 				"\t\tmemory[AD] <= X;",
 				"\tend",
-				"\tOUT <= memory[AD];",
 				"end"
+			]
+		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:22",
+		"key": "1021",
+		"name": "DFF",
+		"inputs": [
+			{
+				"label": "ST",
+				"width": 1
+			},
+			{
+				"label": "D",
+				"width": 1
+			},
+			{
+				"label": "CLK",
+				"width": 1
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 1
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"reg R;",
+				"assign OUT = R;",
+				"initial R = 0;",
+				"always @(negedge CLK) begin",
+				"\tif(ST) R <= D;",
+				"end",
+				""
 			]
 		}
 	}

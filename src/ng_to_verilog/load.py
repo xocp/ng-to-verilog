@@ -64,5 +64,6 @@ def normalize_ng_data(ngData):
             "NandGame:Levels:OPCODES2",
             "NandGame:Levels:IO2",
             "NandGame:Levels:RELAY_NAND",
+            "NandGame:Levels:DFF"
         ]
     ]

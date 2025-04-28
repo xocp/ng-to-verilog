@@ -1,10 +1,3 @@
-from enum import Enum
-
-class RegisterTrigger(Enum):
-     Default = 0
-     Negedge = 1
-     Posedge = 2
-
 _MIN_WORD_SIZE = 2
 DEFAULT_WORD_SIZE = 16
 
@@ -12,16 +5,6 @@ DEFAULT_WORD_SIZE = 16
 _word_size = DEFAULT_WORD_SIZE
 _output_folder = "_output"
 _primitiveNameDictionary = None
-_registerTrigger = RegisterTrigger.Default
-
-def get_register_trigger():
-	global _registerTrigger
-	return _registerTrigger
-
-
-def set_register_trigger(registerTrigger):
-	global _registerTrigger
-	_registerTrigger = registerTrigger
 
 
 def get_primitive_name_dictionary():

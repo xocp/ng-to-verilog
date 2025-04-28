@@ -11,16 +11,6 @@ def fix_ng_primitives(ngData):
     for component in ngData:
         if ngv.is_ng_primitive(component):
             componentName = component["name"]
-            
-            if componentName == "DFF16":
-                if ngv.get_register_trigger() == ngv.RegisterTrigger.Negedge:
-                    triggerValue = "negedge"
-                else:
-                    triggerValue = "posedge"
-                
-				# iterate over list of strings, replace {trigger} with triggerValue
-                for i in range(len(component["verilog"]["body"])):
-                    component["verilog"]["body"][i] = component["verilog"]["body"][i].replace(r"{trigger}", triggerValue)
 
             if componentName.endswith("16") and word_size != ngv.DEFAULT_WORD_SIZE:
                 updatedComponentName = f"{componentName[0:-2]}{word_size}"

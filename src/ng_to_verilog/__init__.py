@@ -18,9 +18,6 @@ from .settings import get_output_folder as get_output_folder
 from .settings import set_output_folder as set_output_folder
 from .settings import get_primitive_name_dictionary as get_primitive_name_dictionary
 from .settings import set_primitive_name_dictionary as set_primitive_name_dictionary
-from .settings import get_register_trigger as get_register_trigger
-from .settings import set_register_trigger as set_register_trigger
-from .settings import RegisterTrigger as RegisterTrigger
 from .settings import DEFAULT_WORD_SIZE as DEFAULT_WORD_SIZE
 
 from .util import is_ng_primitive as is_ng_primitive

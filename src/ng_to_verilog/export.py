@@ -301,10 +301,10 @@ def build_module(component, ngData, env, node=None):
             currentAddress = 0
 
             for word in node["state"]["words"]:
-                romData += f"\t\t{currentAddress}: OUT = {word};\n"
+                romData += f"\t\t{currentAddress}: D = {word};\n"
                 currentAddress += 1
 
-            romData += "\t\tdefault: OUT = 0;"
+            romData += "\t\tdefault: D = 0;"
 
             for verilogBodyIndex, bodyLine in enumerate(module["verilog"]["body"]):
                 if "%ROM_DATA%" in bodyLine:
