@@ -12,6 +12,7 @@ Run your favorite Nandgame creations on real or simulated hardware! Reify your t
 - Uses Jinja2 templating system for Verilog file generation
 - Linux and Windows support
 - Output has been tested in iverilog as well as Vivado
+- Sample CPU was tested on an Arty S7-25 FPGA board
 
 ## Motivation
 
@@ -28,45 +29,20 @@ or, from the root folder of the repo
 python -m pip install -e .
 ```
 
-You can run the provided example via `python3 samples/NgToVerilog.py` and it will convert a sample Nandgame export with a custom CPU into Icarus Verilog compatible output (see below for a Vivado output and FPGA synthesis using an Arty S7-25 development board). Build scripts will be generated for Icarus Verilog / GtkWave along with instructions output to the python console. You can also uncomment and run the CPU3 export which is the Nandgame computer. You'll have to edit any exported ROMs and copy in specific level code for the Nandgame CPU. The included custom CPU loads a Fibonacci sequence program which is output on a debug port. A basic testbench will be created, but will no doubt need to be modified. In the case of the custom CPU, you will need to add two lines above RST=0; in mrcomputer_tb.v as shown below:
-
-```python
-// TODO: adjust any reg (input) values here
-RST = 1;
-#20;
-RST = 0;
-#10000;
-```
+You can run the provided example via `python3 samples/NgToVerilog.py` and it will convert a sample Nandgame export with a custom CPU into Icarus Verilog compatible output (see below for a Vivado output and FPGA synthesis using an Arty S7-25 development board). Build scripts will be generated for Icarus Verilog / GtkWave along with instructions output to the python console. You can also uncomment and run the CPU3 export which is the Nandgame computer. You'll have to edit any exported ROMs and copy in specific level code for the Nandgame CPU. The included custom CPU loads a Fibonacci sequence program which is output on a debug port. A basic testbench will be created, but will no doubt need to be modified. In the case of the custom CPU, a fileset is provided in samples/verilog that has had small modifications to enable running on an FPGA.
 
 Sample GTKWave output, showing the Fibonacci sequence on a debug port
 ![Sample GTKWave Output](https://github.com/xocp/ng-to-verilog/blob/main/images/mrcomputer_gtkwave_sample.png?raw=true)
 
+## Troubleshooting
+All flip-flops and registers are converted to equivalent (non-primitive) Verilog. There is no provision currently for detecting custom flip-flop or register components. You will have to use the built-in Nandgame primitives.
+
+One important note is that registers are exported to activate on posedge CLK. However, the 1-bit D flip-flop is exported to activate on negedge CLK. This is the configuration that worked for the purposes of the sample CPU. You may have to experiment here.
+
 ## FPGA Notes
-[Clock Divider](https://gist.github.com/Thraetaona/ba941e293d36d0f76db6b9f3476b823c)
+Included in the samples/verilog folder is a Vivado constraints file for the Arty S7-25, which can be used in Vivado, along with the testbench and associated files, to enable flashing to FPGA. The defined constraint names are referenced in the testbench file (e.g., clock, LEDs).
 
-Replace this statement in mrcomputer.v:
-
-Add a CLK input above the RST input
-Replace the following
-CLOCK CLOCK_0(
-	.OUT (CLOCK_0_OUT)
-);
-with
-assign CLOCK_0_OUT = CLK;
-
-Update these lines in mrcomputer_tb.v
-wire ce_out_1hz;
-mrcomputer mrcomputer_0(
-	.OUT0 (mrcomputer_0_OUT0),
-	.OUT1 (mrcomputer_0_OUT1),
-	.CLK (ce_out_1hz),
-	.RST (RST)
-);
-
-BUFGCE
-
-Constraints file should have CLK100MHZ defined
-
+![Running on Arty S7-25](https://github.com/xocp/ng-to-verilog/blob/main/images/mrcomputer_fpga.gif?raw=true)
 
 ## Credits
 - To Olav Junker Kjær, the creator of [Nandgame](https://nandgame.com/) who has undoubtedly inspired more generations of people into the world of digital logic. Kudos.
