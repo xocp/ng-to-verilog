@@ -1,0 +1,64 @@
+module mridMOVI(
+	output OUT0,
+	input [15:0] I
+);
+
+wire SPLIT16_0_D15;
+wire SPLIT16_0_D14;
+wire SPLIT16_0_D13;
+wire SPLIT16_0_D12;
+wire SPLIT16_0_D11;
+wire SPLIT16_0_D10;
+wire SPLIT16_0_D9;
+wire SPLIT16_0_D8;
+wire SPLIT16_0_D7;
+wire SPLIT16_0_D6;
+wire SPLIT16_0_D5;
+wire SPLIT16_0_D4;
+wire SPLIT16_0_D3;
+wire SPLIT16_0_D2;
+wire SPLIT16_0_D1;
+wire SPLIT16_0_D0;
+wire nor8_1_OUT0;
+wire INV_2_OUT;
+
+SPLIT16 SPLIT16_0(
+	.D15 (SPLIT16_0_D15),
+	.D14 (SPLIT16_0_D14),
+	.D13 (SPLIT16_0_D13),
+	.D12 (SPLIT16_0_D12),
+	.D11 (SPLIT16_0_D11),
+	.D10 (SPLIT16_0_D10),
+	.D9 (SPLIT16_0_D9),
+	.D8 (SPLIT16_0_D8),
+	.D7 (SPLIT16_0_D7),
+	.D6 (SPLIT16_0_D6),
+	.D5 (SPLIT16_0_D5),
+	.D4 (SPLIT16_0_D4),
+	.D3 (SPLIT16_0_D3),
+	.D2 (SPLIT16_0_D2),
+	.D1 (SPLIT16_0_D1),
+	.D0 (SPLIT16_0_D0),
+	.IN (I)
+);
+	
+nor8 nor8_1(
+	.OUT0 (nor8_1_OUT0),
+	.IN0 (SPLIT16_0_D7),
+	.IN1 (SPLIT16_0_D6),
+	.IN2 (SPLIT16_0_D5),
+	.IN3 (SPLIT16_0_D4),
+	.IN4 (SPLIT16_0_D3),
+	.IN5 (SPLIT16_0_D2),
+	.IN6 (INV_2_OUT),
+	.IN7 (SPLIT16_0_D0)
+);
+	
+INV INV_2(
+	.OUT (INV_2_OUT),
+	.IN (SPLIT16_0_D1)
+);
+	
+assign OUT0 = nor8_1_OUT0;
+
+endmodule

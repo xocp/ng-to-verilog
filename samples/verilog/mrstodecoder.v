@@ -1,0 +1,203 @@
+module mrstodecoder(
+	output STO_RAM,
+	output STO_REG,
+	output STO_ALU,
+	output STO_IO,
+	input [15:0] I,
+	input [15:0] DST
+);
+
+wire SPLIT16_0_D15;
+wire SPLIT16_0_D14;
+wire SPLIT16_0_D13;
+wire SPLIT16_0_D12;
+wire SPLIT16_0_D11;
+wire SPLIT16_0_D10;
+wire SPLIT16_0_D9;
+wire SPLIT16_0_D8;
+wire SPLIT16_0_D7;
+wire SPLIT16_0_D6;
+wire SPLIT16_0_D5;
+wire SPLIT16_0_D4;
+wire SPLIT16_0_D3;
+wire SPLIT16_0_D2;
+wire SPLIT16_0_D1;
+wire SPLIT16_0_D0;
+wire OR_1_OUT;
+wire OR_2_OUT;
+wire INV_3_OUT;
+wire AND_4_OUT;
+wire nor3_5_OUT0;
+wire AND_6_OUT;
+wire mridMOV_7_OUT0;
+wire mridMOVI_8_OUT0;
+wire OR_9_OUT;
+wire SPLIT16_10_D15;
+wire SPLIT16_10_D14;
+wire SPLIT16_10_D13;
+wire SPLIT16_10_D12;
+wire SPLIT16_10_D11;
+wire SPLIT16_10_D10;
+wire SPLIT16_10_D9;
+wire SPLIT16_10_D8;
+wire SPLIT16_10_D7;
+wire SPLIT16_10_D6;
+wire SPLIT16_10_D5;
+wire SPLIT16_10_D4;
+wire SPLIT16_10_D3;
+wire SPLIT16_10_D2;
+wire SPLIT16_10_D1;
+wire SPLIT16_10_D0;
+wire AND_11_OUT;
+wire AND_12_OUT;
+wire INV_13_OUT;
+wire AND_14_OUT;
+wire INV_15_OUT;
+wire nor3_16_OUT0;
+wire AND_17_OUT;
+wire INV_18_OUT;
+
+SPLIT16 SPLIT16_0(
+	.D15 (SPLIT16_0_D15),
+	.D14 (SPLIT16_0_D14),
+	.D13 (SPLIT16_0_D13),
+	.D12 (SPLIT16_0_D12),
+	.D11 (SPLIT16_0_D11),
+	.D10 (SPLIT16_0_D10),
+	.D9 (SPLIT16_0_D9),
+	.D8 (SPLIT16_0_D8),
+	.D7 (SPLIT16_0_D7),
+	.D6 (SPLIT16_0_D6),
+	.D5 (SPLIT16_0_D5),
+	.D4 (SPLIT16_0_D4),
+	.D3 (SPLIT16_0_D3),
+	.D2 (SPLIT16_0_D2),
+	.D1 (SPLIT16_0_D1),
+	.D0 (SPLIT16_0_D0),
+	.IN (I)
+);
+	
+OR OR_1(
+	.OUT (OR_1_OUT),
+	.A (SPLIT16_0_D3),
+	.B (SPLIT16_0_D2)
+);
+	
+OR OR_2(
+	.OUT (OR_2_OUT),
+	.A (SPLIT16_0_D4),
+	.B (OR_1_OUT)
+);
+	
+INV INV_3(
+	.OUT (INV_3_OUT),
+	.IN (SPLIT16_0_D5)
+);
+	
+AND AND_4(
+	.OUT (AND_4_OUT),
+	.A (INV_3_OUT),
+	.B (OR_2_OUT)
+);
+	
+nor3 nor3_5(
+	.OUT0 (nor3_5_OUT0),
+	.IN0 (SPLIT16_10_D2),
+	.IN1 (SPLIT16_10_D1),
+	.IN2 (INV_15_OUT)
+);
+	
+AND AND_6(
+	.OUT (AND_6_OUT),
+	.A (AND_11_OUT),
+	.B (OR_9_OUT)
+);
+	
+mridMOV mridMOV_7(
+	.OUT0 (mridMOV_7_OUT0),
+	.I (I)
+);
+	
+mridMOVI mridMOVI_8(
+	.OUT0 (mridMOVI_8_OUT0),
+	.I (I)
+);
+	
+OR OR_9(
+	.OUT (OR_9_OUT),
+	.A (mridMOV_7_OUT0),
+	.B (mridMOVI_8_OUT0)
+);
+	
+SPLIT16 SPLIT16_10(
+	.D15 (SPLIT16_10_D15),
+	.D14 (SPLIT16_10_D14),
+	.D13 (SPLIT16_10_D13),
+	.D12 (SPLIT16_10_D12),
+	.D11 (SPLIT16_10_D11),
+	.D10 (SPLIT16_10_D10),
+	.D9 (SPLIT16_10_D9),
+	.D8 (SPLIT16_10_D8),
+	.D7 (SPLIT16_10_D7),
+	.D6 (SPLIT16_10_D6),
+	.D5 (SPLIT16_10_D5),
+	.D4 (SPLIT16_10_D4),
+	.D3 (SPLIT16_10_D3),
+	.D2 (SPLIT16_10_D2),
+	.D1 (SPLIT16_10_D1),
+	.D0 (SPLIT16_10_D0),
+	.IN (DST)
+);
+	
+AND AND_11(
+	.OUT (AND_11_OUT),
+	.A (nor3_5_OUT0),
+	.B (SPLIT16_10_D7)
+);
+	
+AND AND_12(
+	.OUT (AND_12_OUT),
+	.A (OR_9_OUT),
+	.B (INV_13_OUT)
+);
+	
+INV INV_13(
+	.OUT (INV_13_OUT),
+	.IN (SPLIT16_10_D7)
+);
+	
+AND AND_14(
+	.OUT (AND_14_OUT),
+	.A (OR_9_OUT),
+	.B (AND_17_OUT)
+);
+	
+INV INV_15(
+	.OUT (INV_15_OUT),
+	.IN (SPLIT16_10_D0)
+);
+	
+nor3 nor3_16(
+	.OUT0 (nor3_16_OUT0),
+	.IN0 (SPLIT16_10_D2),
+	.IN1 (INV_18_OUT),
+	.IN2 (SPLIT16_10_D0)
+);
+	
+AND AND_17(
+	.OUT (AND_17_OUT),
+	.A (nor3_16_OUT0),
+	.B (SPLIT16_10_D7)
+);
+	
+INV INV_18(
+	.OUT (INV_18_OUT),
+	.IN (SPLIT16_10_D1)
+);
+	
+assign STO_RAM = AND_6_OUT;
+assign STO_REG = AND_12_OUT;
+assign STO_ALU = AND_4_OUT;
+assign STO_IO = AND_14_OUT;
+
+endmodule

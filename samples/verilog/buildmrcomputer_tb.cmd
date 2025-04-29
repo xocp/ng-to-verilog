@@ -1,0 +1,3 @@
+iverilog -o mrcomputer_tb.vvp mrcomputer_tb.v mrcomputer.v CLOCK.v mrreset.v OR.v NAND.v DFF.v ZERO.v INV.v mrregister.v SPLIT16.v DFF16.v SELECT16.v ZERO16.v _8to18bitmux.v mrgpregisters.v _3to8decoder.v AND.v _2to4decoder.v _nor.v and3.v mrspregister.v BUNDLE16.v SPLIT22.v mrcontrolunit.v mrminicontrolunit.v nor8.v mridMOVI.v mrstodecoder.v nor3.v mridMOV.v mrdatabus.v mrrom_ram.v ROM.v RAM16.v mraddressbus.v mralu.v mrlogicunit.v AND16.v INV16.v OR16.v XOR16.v mrarithmeticunit.v ADDC16.v SUB16.v mrio.v mrprogramcounter.v COUNTER.v INC16.v
+vvp mrcomputer_tb.vvp
+gtkwave mrcomputer_tb.vcd

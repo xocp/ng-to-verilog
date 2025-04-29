@@ -1,0 +1,79 @@
+module mrrom_ram(
+	output [15:0] D_OUT,
+	input [15:0] ADDR,
+	input [15:0] D_IN,
+	input STO,
+	input CLK
+);
+
+wire [15:0] ROM_0_OUT;
+wire [15:0] RAM16_1_OUT;
+wire SPLIT16_2_D15;
+wire SPLIT16_2_D14;
+wire SPLIT16_2_D13;
+wire SPLIT16_2_D12;
+wire SPLIT16_2_D11;
+wire SPLIT16_2_D10;
+wire SPLIT16_2_D9;
+wire SPLIT16_2_D8;
+wire SPLIT16_2_D7;
+wire SPLIT16_2_D6;
+wire SPLIT16_2_D5;
+wire SPLIT16_2_D4;
+wire SPLIT16_2_D3;
+wire SPLIT16_2_D2;
+wire SPLIT16_2_D1;
+wire SPLIT16_2_D0;
+wire nor3_3_OUT0;
+wire [15:0] SELECT16_4_OUT;
+
+ROM ROM_0(
+	.OUT (ROM_0_OUT),
+	.A (ADDR)
+);
+	
+RAM16 RAM16_1(
+	.OUT (RAM16_1_OUT),
+	.ST (STO),
+	.X (D_IN),
+	.AD (ADDR),
+	.CLK (CLK)
+);
+	
+SPLIT16 SPLIT16_2(
+	.D15 (SPLIT16_2_D15),
+	.D14 (SPLIT16_2_D14),
+	.D13 (SPLIT16_2_D13),
+	.D12 (SPLIT16_2_D12),
+	.D11 (SPLIT16_2_D11),
+	.D10 (SPLIT16_2_D10),
+	.D9 (SPLIT16_2_D9),
+	.D8 (SPLIT16_2_D8),
+	.D7 (SPLIT16_2_D7),
+	.D6 (SPLIT16_2_D6),
+	.D5 (SPLIT16_2_D5),
+	.D4 (SPLIT16_2_D4),
+	.D3 (SPLIT16_2_D3),
+	.D2 (SPLIT16_2_D2),
+	.D1 (SPLIT16_2_D1),
+	.D0 (SPLIT16_2_D0),
+	.IN (ADDR)
+);
+	
+nor3 nor3_3(
+	.OUT0 (nor3_3_OUT0),
+	.IN0 (SPLIT16_2_D15),
+	.IN1 (SPLIT16_2_D14),
+	.IN2 (SPLIT16_2_D13)
+);
+	
+SELECT16 SELECT16_4(
+	.OUT (SELECT16_4_OUT),
+	.S (nor3_3_OUT0),
+	.D1 (ROM_0_OUT),
+	.D0 (RAM16_1_OUT)
+);
+	
+assign D_OUT = SELECT16_4_OUT;
+
+endmodule

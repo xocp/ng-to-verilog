@@ -1,0 +1,208 @@
+module mrlogicunit(
+	output [15:0] OUT,
+	input [15:0] D_IN,
+	input [15:0] ACC,
+	input O2,
+	input O1,
+	input O0
+);
+
+wire SPLIT16_0_D15;
+wire SPLIT16_0_D14;
+wire SPLIT16_0_D13;
+wire SPLIT16_0_D12;
+wire SPLIT16_0_D11;
+wire SPLIT16_0_D10;
+wire SPLIT16_0_D9;
+wire SPLIT16_0_D8;
+wire SPLIT16_0_D7;
+wire SPLIT16_0_D6;
+wire SPLIT16_0_D5;
+wire SPLIT16_0_D4;
+wire SPLIT16_0_D3;
+wire SPLIT16_0_D2;
+wire SPLIT16_0_D1;
+wire SPLIT16_0_D0;
+wire [15:0] BUNDLE16_1_OUT;
+wire OR_2_OUT;
+wire nor8_3_OUT0;
+wire AND_4_OUT;
+wire OR_5_OUT;
+wire AND_6_OUT;
+wire OR_7_OUT;
+wire AND_8_OUT;
+wire INV_9_OUT;
+wire [15:0] AND16_10_OUT;
+wire [15:0] INV16_11_OUT;
+wire [15:0] OR16_12_OUT;
+wire [15:0] XOR16_13_OUT;
+wire [15:0] SELECT16_14_OUT;
+wire [15:0] SELECT16_15_OUT;
+wire [15:0] SELECT16_16_OUT;
+wire [15:0] SELECT16_17_OUT;
+wire _2to4decoder_18_OUT3;
+wire _2to4decoder_18_OUT2;
+wire _2to4decoder_18_OUT1;
+wire _2to4decoder_18_OUT0;
+wire ZERO_19_OUT;
+
+SPLIT16 SPLIT16_0(
+	.D15 (SPLIT16_0_D15),
+	.D14 (SPLIT16_0_D14),
+	.D13 (SPLIT16_0_D13),
+	.D12 (SPLIT16_0_D12),
+	.D11 (SPLIT16_0_D11),
+	.D10 (SPLIT16_0_D10),
+	.D9 (SPLIT16_0_D9),
+	.D8 (SPLIT16_0_D8),
+	.D7 (SPLIT16_0_D7),
+	.D6 (SPLIT16_0_D6),
+	.D5 (SPLIT16_0_D5),
+	.D4 (SPLIT16_0_D4),
+	.D3 (SPLIT16_0_D3),
+	.D2 (SPLIT16_0_D2),
+	.D1 (SPLIT16_0_D1),
+	.D0 (SPLIT16_0_D0),
+	.IN (D_IN)
+);
+	
+BUNDLE16 BUNDLE16_1(
+	.OUT (BUNDLE16_1_OUT),
+	.D15 (ZERO_19_OUT),
+	.D14 (ZERO_19_OUT),
+	.D13 (ZERO_19_OUT),
+	.D12 (ZERO_19_OUT),
+	.D11 (ZERO_19_OUT),
+	.D10 (ZERO_19_OUT),
+	.D9 (ZERO_19_OUT),
+	.D8 (ZERO_19_OUT),
+	.D7 (ZERO_19_OUT),
+	.D6 (ZERO_19_OUT),
+	.D5 (ZERO_19_OUT),
+	.D4 (ZERO_19_OUT),
+	.D3 (ZERO_19_OUT),
+	.D2 (ZERO_19_OUT),
+	.D1 (ZERO_19_OUT),
+	.D0 (OR_2_OUT)
+);
+	
+OR OR_2(
+	.OUT (OR_2_OUT),
+	.A (_2to4decoder_18_OUT0),
+	.B (OR_5_OUT)
+);
+	
+nor8 nor8_3(
+	.OUT0 (nor8_3_OUT0),
+	.IN0 (SPLIT16_0_D7),
+	.IN1 (SPLIT16_0_D6),
+	.IN2 (SPLIT16_0_D5),
+	.IN3 (SPLIT16_0_D4),
+	.IN4 (SPLIT16_0_D3),
+	.IN5 (SPLIT16_0_D2),
+	.IN6 (SPLIT16_0_D1),
+	.IN7 (SPLIT16_0_D0)
+);
+	
+AND AND_4(
+	.OUT (AND_4_OUT),
+	.A (nor8_3_OUT0),
+	.B (_2to4decoder_18_OUT1)
+);
+	
+OR OR_5(
+	.OUT (OR_5_OUT),
+	.A (AND_4_OUT),
+	.B (OR_7_OUT)
+);
+	
+AND AND_6(
+	.OUT (AND_6_OUT),
+	.A (SPLIT16_0_D7),
+	.B (_2to4decoder_18_OUT3)
+);
+	
+OR OR_7(
+	.OUT (OR_7_OUT),
+	.A (AND_8_OUT),
+	.B (AND_6_OUT)
+);
+	
+AND AND_8(
+	.OUT (AND_8_OUT),
+	.A (INV_9_OUT),
+	.B (_2to4decoder_18_OUT2)
+);
+	
+INV INV_9(
+	.OUT (INV_9_OUT),
+	.IN (SPLIT16_0_D7)
+);
+	
+AND16 AND16_10(
+	.OUT (AND16_10_OUT),
+	.A (D_IN),
+	.B (ACC)
+);
+	
+INV16 INV16_11(
+	.OUT (INV16_11_OUT),
+	.A (D_IN)
+);
+	
+OR16 OR16_12(
+	.OUT (OR16_12_OUT),
+	.A (D_IN),
+	.B (ACC)
+);
+	
+XOR16 XOR16_13(
+	.OUT (XOR16_13_OUT),
+	.A (D_IN),
+	.B (ACC)
+);
+	
+SELECT16 SELECT16_14(
+	.OUT (SELECT16_14_OUT),
+	.S (O2),
+	.D1 (SELECT16_15_OUT),
+	.D0 (BUNDLE16_1_OUT)
+);
+	
+SELECT16 SELECT16_15(
+	.OUT (SELECT16_15_OUT),
+	.S (O1),
+	.D1 (SELECT16_17_OUT),
+	.D0 (SELECT16_16_OUT)
+);
+	
+SELECT16 SELECT16_16(
+	.OUT (SELECT16_16_OUT),
+	.S (O0),
+	.D1 (OR16_12_OUT),
+	.D0 (AND16_10_OUT)
+);
+	
+SELECT16 SELECT16_17(
+	.OUT (SELECT16_17_OUT),
+	.S (O0),
+	.D1 (INV16_11_OUT),
+	.D0 (XOR16_13_OUT)
+);
+	
+_2to4decoder _2to4decoder_18(
+	.OUT3 (_2to4decoder_18_OUT3),
+	.OUT2 (_2to4decoder_18_OUT2),
+	.OUT1 (_2to4decoder_18_OUT1),
+	.OUT0 (_2to4decoder_18_OUT0),
+	.D1 (O1),
+	.D0 (O0)
+);
+	
+ZERO ZERO_19(
+	.OUT (ZERO_19_OUT)
+);
+	
+assign OUT = SELECT16_14_OUT;
+
+endmodule
