@@ -18,18 +18,18 @@ reg RST;
 reg [3:0] reset_count;
 
 // Uncomment for behavioral simulation
-//reg CLK;
-//initial CLK = 0;
-//always #1000 CLK <= ~CLK;
-//assign clk_1hz = CLK;
+reg CLK;
+initial CLK = 0;
+always #1000 CLK <= ~CLK;
+assign clk_1hz = CLK;
 
 // Uncomment for synthesis
- reg [25:0] count = 0;
- always @ (posedge(CLK100MHZ)) count <= count + 1;    
- BUFG BUFG_inst(
-     .O(clk_1hz),    // 1-bit output: Buffer
-     .I(count[24])     // 1-bit input: Buffer
- );
+//  reg [25:0] count = 0;
+//  always @ (posedge(CLK100MHZ)) count <= count + 1;    
+//  BUFG BUFG_inst(
+//      .O(clk_1hz),    // 1-bit output: Buffer
+//      .I(count[24])     // 1-bit input: Buffer
+//  );
 
 mrcomputer mrcomputer_0(
 	.OUT0 (mrcomputer_0_OUT0),
