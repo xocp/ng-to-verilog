@@ -4,6 +4,8 @@ ng_to_verilog is a Python module that enables conversion of [Nandgame](https://n
 
 Run your favorite Nandgame creations on real or simulated hardware! Reify your totally inefficient ripple-carry adders onto an FPGA board! Kickstart a career or life-long interest in digital logic from an accessible entry-point.
 
+![Nandgame](https://github.com/xocp/ng-to-verilog/blob/main/images/nandgame_mrcomputer.png?raw=true)
+
 ## Features
 
 - Convert from Nandgame json exports into Verilog
