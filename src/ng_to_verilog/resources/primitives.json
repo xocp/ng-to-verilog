@@ -900,5 +900,35 @@
 				""
 			]
 		}
+	},
+	{
+		"componentName": "NandGame:PrimitiveComponent:23",
+		"key": "1022",
+		"name": "ISZERO",
+		"inputs": [
+			{
+				"label": "IN",
+				"width": 16
+			}
+		],
+		"outputs": [
+			{
+				"label": "OUT",
+				"width": 1
+			}
+		],
+		"nodes": [],
+		"connections": [],
+		"verilog":
+		{
+			"header": [],
+			"body":
+			[
+				"always @(*) begin",
+				"\tif (IN == 0) OUT = 1;",
+				"\telse OUT = 0;",
+				"end"
+			]
+		}
 	}
 ]

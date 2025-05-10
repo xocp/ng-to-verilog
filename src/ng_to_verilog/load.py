@@ -66,6 +66,7 @@ def normalize_ng_data(ngData):
             "NandGame:Levels:OPCODES2",
             "NandGame:Levels:IO2",
             "NandGame:Levels:RELAY_NAND",
-            "NandGame:Levels:DFF"
+            "NandGame:Levels:DFF", # replaced in primitives.json
+            "NandGame:Levels:ISZERO" # replaced in primitives.json since the Nandgame level input is 4-bit, but when it is used elsewhere it is 16-bit
         ]
     ]
