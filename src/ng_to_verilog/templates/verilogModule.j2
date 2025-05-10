@@ -10,7 +10,7 @@
 {% macro instancePorts(ports) %}
 	{% if ports|length > 0 %}(
 		{% for port in ports %}	.{{ port.name }} ({{ port.variableName }}){% if loop.last == False %},{% endif +%}
-		{% endfor %});{% else %};
+		{% endfor %});{% else %}();
 	{%- endif %}
 {% endmacro %}
 {# header #}
