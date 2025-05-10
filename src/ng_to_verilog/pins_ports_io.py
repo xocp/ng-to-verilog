@@ -45,9 +45,9 @@ def get_ng_level_io_pins(levelName):
             create_ng_pin("CLK", 1),
         ]
         outputs = [
-            create_ng_pin("A", 1),
-            create_ng_pin("D", 1),
-            create_ng_pin("STAR_A", 1),
+            create_ng_pin("A", wordSize),
+            create_ng_pin("D", wordSize),
+            create_ng_pin("STAR_A", wordSize),
         ]
     elif levelName == "RAM":
         inputs = [

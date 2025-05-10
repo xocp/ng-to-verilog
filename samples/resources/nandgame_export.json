@@ -13154,8 +13154,8 @@
 			},
 			{
 				"type": "RAM",
-				"x": 494,
-				"y": 237,
+				"x": 462,
+				"y": 214,
 				"id": "2"
 			}
 		],
@@ -13242,8 +13242,8 @@
 			},
 			{
 				"source": {
-					"nodeId": "input",
-					"connectorId": "2"
+					"nodeId": "0",
+					"connectorId": "0"
 				},
 				"target": {
 					"nodeId": "2",
