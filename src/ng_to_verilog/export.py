@@ -49,7 +49,6 @@ def export(topLevelComponentName, ngData):
                 "target": {"nodeId": "0", "connectorId": str(connectorId)},
             }
         )
-        connectorId += 1
 
     for connectorId in range(0, len(testbenchOutputs)):
         testbenchConnections.append(
@@ -58,7 +57,6 @@ def export(topLevelComponentName, ngData):
                 "target": {"nodeId": "output", "connectorId": str(connectorId)},
             }
         )
-        connectorId += 1
 
     testbenchComponent = {
         "componentName": "NandGame:TestbenchComponent:Testbench",
