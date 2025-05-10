@@ -1,7 +1,9 @@
 # https://docs.python-guide.org/writing/structure/
-import os
 import json
+import os
+
 import ng_to_verilog as ngv
+
 
 def load_ng_data(filename):
     with open(filename) as f:

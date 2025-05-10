@@ -1,5 +1,6 @@
 import ng_to_verilog as ngv
 
+
 def test_fix_ng_primitives():
 	orig_name_dict = ngv.get_primitive_name_dictionary()
 	ngv.set_primitive_name_dictionary({})
@@ -41,4 +42,3 @@ def test_fix_ng_primitive_refs():
 
 	ngv.set_word_size(ngv.DEFAULT_WORD_SIZE)
 	ngv.set_primitive_name_dictionary(orig_name_dict)
-	
