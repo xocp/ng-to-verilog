@@ -20,7 +20,7 @@ testpaths = [
 
 [project]
 name = "ng-to-verilog"
-version = "2025.05.04"
+version = "2025.05.09"
 description = "Nandgame to Verilog"
 readme = "README.md"
 authors = [{ name = "Patrick Cox", email = "patrick.cox@gmail.com" }]
