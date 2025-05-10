@@ -37,6 +37,8 @@ Sample GTKWave output, showing the Fibonacci sequence on a debug port
 ![Sample GTKWave Output](https://github.com/xocp/ng-to-verilog/blob/main/images/mrcomputer_gtkwave_sample.png?raw=true)
 
 ## Troubleshooting
+In Verilog, component inputs must be tied to a value/signal - not so in Nandgame. So, you may have to debug through any Nandgame levels where you relied on not having to tie an input to a value. Error messages will be emitted directing you to the level/component where there is an issue. Often you will just need to tie the input to a "zero" component.
+
 All flip-flops and registers are converted to equivalent (non-primitive) Verilog. There is no provision currently for detecting custom flip-flop or register components. You will have to use the built-in Nandgame primitives.
 
 One important note is that registers are exported to activate on posedge CLK. However, the 1-bit D flip-flop is exported to activate on negedge CLK. This is the configuration that worked for the purposes of the sample CPU. You may have to experiment here.
