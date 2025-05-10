@@ -914,6 +914,7 @@
 		"outputs": [
 			{
 				"label": "OUT",
+				"verilogType": "reg",
 				"width": 1
 			}
 		],
