@@ -20,7 +20,7 @@ testpaths = [
 
 [project]
 name = "ng-to-verilog"
-version = "2025.04.24"
+version = "2025.05.04"
 description = "Nandgame to Verilog"
 readme = "README.md"
 authors = [{ name = "Patrick Cox", email = "patrick.cox@gmail.com" }]
@@ -41,4 +41,28 @@ requires-python = ">=3.9"
 dev = ["pip-tools", "pytest"]
 
 [project.urls]
-Homepage = "https://github.com/xocp/ng-to-python"
+Homepage = "https://github.com/xocp/ng-to-verilog"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "N",  # PEP8 naming convetions
+    "D"  # pydocstyle
+]
+ignore = [
+    "C901",  # too complex
+    "W191",  # indentation contains tabs
+    "D401"  # imperative mood
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+

@@ -1,6 +1,9 @@
-import ng_to_verilog as ngv
-import pytest
 import json
+
+import pytest
+
+import ng_to_verilog as ngv
+
 
 def test_create_ng_pin():
 	pin = ngv.pins_ports_io.create_ng_pin("test", 16)
@@ -88,7 +91,7 @@ def load_component():
 		ng_data = json.load(f)
 
 	ng_data = ngv.load.normalize_ng_data(ng_data)
-	
+
 	test_component = [component for component in ng_data if component['componentName'] == 'NandGame:Levels:SUB']
 	assert len(test_component) == 1
 	test_component = test_component[0]

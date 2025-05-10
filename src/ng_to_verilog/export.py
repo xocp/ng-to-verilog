@@ -1,6 +1,8 @@
-from jinja2 import Environment, PackageLoader
-import ng_to_verilog as ngv
 import os
+
+from jinja2 import Environment, PackageLoader
+
+import ng_to_verilog as ngv
 
 _UNDEFINED_PORT = "undefined"
 

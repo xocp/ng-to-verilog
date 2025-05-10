@@ -1,5 +1,7 @@
-import ng_to_verilog as ngv
 import pytest
+
+import ng_to_verilog as ngv
+
 
 def test_primitive_name_dictionary():
 	dict = { "one": 1, "two": "2" }
